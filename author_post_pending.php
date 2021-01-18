@@ -1,7 +1,8 @@
 function postPending($post_ID)
  { 
-     if(get_role('author'))
-     {
+$user = wp_get_current_user();
+$allowed_roles = array( 'author' );
+if ( array_intersect( $allowed_roles, $user->roles ) ) {
         //Unhook this function
         remove_action('post_updated', 'postPending', 10, 3);
 
